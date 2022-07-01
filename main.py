@@ -29,6 +29,14 @@ data = pandas.read_csv('nato_phonetic_alphabet.csv')
 data_dict = {row.letter: row.code for (index,row) in data.iterrows()}
 print(data_dict)
 
-word = input('what word do you want to code?').upper()
-output_list = [data_dict[letter]for letter in word]
-print(output_list)
+def generate():
+    word = input('what word do you want to code?').upper()
+    try:
+        output_list = [data_dict[letter] for letter in word]
+    except KeyError:
+        print('Sorry, only letters please')
+        generate()
+    else:
+        print(output_list)
+
+generate()
